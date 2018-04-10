@@ -17,22 +17,30 @@ int		get_hook(t_mlx *fdf)
 	return (1);
 }
 
-int		key_hook(int keycode, void *param, t_mlx *cor)
+int		key_hook(int keycode, t_mlx *param)
 {
-	param = 0;
 	if (keycode == 53)
 		exit(1);
-	if (keycode == 126)
-	{
-		mlx_clear_window(cor->mlx_ptr, cor->win_ptr);
-		cor->dx -= 100;
-	}
+	mlx_clear_window(param->mlx_ptr, param->win_ptr);
 	if (keycode == 123)
-		cor->dx -= 100;
-	if (keycode == 125)
-		cor->dx += 100;
+		param->delx -= 10;
+	if (keycode == 126)
+		param->dely -= 10;
 	if (keycode == 124)
-		cor->dy += 100;
+		param->delx += 10;
+	if (keycode == 125)
+		param->dely += 10;
+	if (keycode == 78)
+	{
+		param->scalx -= 1;
+		param->scaly -= 1;
+	}
+	if (keycode == 69)
+	{
+		param->scalx += 1;
+		param->scaly += 1;
+	}
+	get_hook(param);
 	return (0);
 }
 
@@ -71,6 +79,8 @@ void	init(t_mlx *fdf)
 	fdf->scaly = 20;
 	fdf->startx = 960;
 	fdf->starty = 340;
+	fdf->delx = 0;
+	fdf->dely = 0;
 }
 
 int			main(int ac, char **av)
@@ -80,6 +90,8 @@ int			main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		//fdf.dx = 0;
+		//fdf.dy = 0;
 		fd = open(av[1], O_RDONLY);
 		ft_count_line(&fdf, fd);
 		fd = open(av[1], O_RDONLY);
@@ -88,7 +100,7 @@ int			main(int ac, char **av)
 		close(fd);
 		fdf.mlx_ptr = mlx_init();
 		fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1920, 1080, "FdF");
-		mlx_expose_hook(fdf.win_ptr, get_hook, &fdf);
+		get_hook(&fdf);
 		mlx_key_hook(fdf.win_ptr, key_hook, &fdf);
 		mlx_loop(fdf.mlx_ptr);
 	}

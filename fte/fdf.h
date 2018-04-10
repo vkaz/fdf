@@ -20,52 +20,53 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-typedef struct s_mlx
+typedef struct		s_mlx
 {
-	void	*mlx_ptr;
-    void	*win_ptr;
-    int		 	x1;
-	int		 	x2;
-	int		 	y1;
-    int		 	y2;
-    int 	    dx;
-	int       	dy;
-	int	    	d;
-	int	    	d1;
-	int	    	d2;
-	int    	    s1;
-    int 		s2;
-    int			nbr_line;
-    int			*nbr_split;
-    int			scalx;
-	int			scaly;
-	int			startx;
-	int			starty;
-    char		**split;
-    int         **nbr;
-    char			*line;
-    int				incx;
-    int				incy;
-    int				i;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	int				**nbr;
+	int				nbr_line;
+	int				*nbr_split;
+	int				a;
+	int				scalx;
+	int				scaly;
+	int				startx;
+	int				x1;
+	int				starty;
+	char			**split;
+	int				y1;
+	int				x2;
+	int				y2;
+	int				dx;
+	int				dy;
+	int				i;
 	int				j;
-    int				k;
-    int             z;
-    int             check;
-    unsigned long	color;
-    int             sx;
-    int             sy;
-}				t_mlx;
+	int				k;
+	char			*line;
+	int				incx;
+	int				incy;
+	int 			delx;
+	int 			dely;
+}					t_mlx;
 
-void	m_pos(t_mlx *fdf);
-void	m_neg(t_mlx *fdf);
-void	bh_dispatch(t_mlx *fdf);
+typedef struct 	s_dob
+{
+	double 	dx;
+	double 	dy;
+	double		d;
+	double		d1;
+	double		d2;
+	double 	s1;
+	double		s2;
+	double		sx;
+}				t_dob;
+
+
+void	draw(t_mlx *fdf);
 int		ft_getnbr(char *str);
 int		ft_count_split(char **split);
 char	*fdf_to_space(char *str);
 void	ft_count_line(t_mlx *fdf, int fd);
-void	m_pos(t_mlx *fdf);
-void	m_neg(t_mlx *fdf);
-void	bh_dispatch(t_mlx *fdf);
 void	read_file(t_mlx *fdf, int fd);
 void	draw_y(t_mlx *fdf);
 void	draw_x(t_mlx *fdf);
