@@ -8,7 +8,11 @@ int		coord_x(t_mlx *fdf, int x, int y)
 
 int		coord_y(t_mlx *fdf, int x, int y, int z)
 {
-	return (fdf->starty + ((fdf->scaly) * x) + ((fdf->scaly) * y) - (z * 2));
+	int 	a;
+
+	a = fdf->starty + ((fdf->scaly) * x) + ((fdf->scaly) * y) - (z * 2);
+	//printf("Control bya arrows\n");
+	return (a);
 }
 
 void	draw_y(t_mlx *fdf)

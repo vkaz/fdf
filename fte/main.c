@@ -12,6 +12,7 @@
 
 int		get_hook(t_mlx *fdf)
 {
+	//printf("Control by arrows\n");
 	draw_y(fdf);
 	draw_x(fdf);
 	return (1);
@@ -81,6 +82,16 @@ void	init(t_mlx *fdf)
 	fdf->starty = 340;
 	fdf->delx = 0;
 	fdf->dely = 0;
+	fdf->x1= 0;
+	fdf->y1 = 0;
+	fdf->x2 = 0;
+	fdf->y2 = 0;
+	fdf->dx = 0;
+	fdf->dy = 0;
+	fdf->i = 0;
+	fdf->incx = 0;
+	fdf->incy = 0;
+	fdf->nbr[0][0] = 0;
 }
 
 int			main(int ac, char **av)
@@ -90,8 +101,6 @@ int			main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		//fdf.dx = 0;
-		//fdf.dy = 0;
 		fd = open(av[1], O_RDONLY);
 		ft_count_line(&fdf, fd);
 		fd = open(av[1], O_RDONLY);

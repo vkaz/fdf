@@ -44,7 +44,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 		@mkdir -p $(OBJ_PATH) 2> /dev/null || true
-		@$(CC) $(C_FLAGS) $(INC) -o $@ -c $<
+		@$(CC) $(INC) -o $@ -c $<
 		@echo -n =
 
 clean:

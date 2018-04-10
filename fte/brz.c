@@ -6,10 +6,10 @@ void 		pos(t_mlx *fdf, t_dob *dob)
 	int 	i;
 
 	i = 0;
-	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, fdf->x2, fdf->y2, 0xFFFFFF);
+	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, fdf->x1, fdf->y1, 0xFFFFFF);
 	while (i < dob->dx)
 		{
-			while (dob->d2 > 0)
+			while (dob->d2 >= 0)
 			{
 				if (dob->d1 == 1)
 					fdf->x1 = fdf->x1+ dob->s1;
@@ -32,10 +32,10 @@ void 		neg(t_mlx *fdf, t_dob *dob)
 	int 	i;
 
 	i = 0;
-	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, fdf->x2, fdf->y2, 0xFFFFFF);
+	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, fdf->x1, fdf->y1, 0xFFFFFF);
 	while (i < dob->dy)
 		{
-			while (dob->d1 > 0)
+			while (dob->d1 >= 0)
 			{
 				if (dob->d2 == 1)
 					fdf->y1 = fdf->y1 + dob->s2;
