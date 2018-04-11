@@ -1,6 +1,5 @@
 #include "fdf.h"
 
-
 void 		pos(t_mlx *fdf, t_dob *dob)
 {
 	int 	i;
@@ -72,4 +71,18 @@ void	draw(t_mlx *fdf)
 		pos(fdf, &dob);
 	else
 		neg(fdf, &dob);
+}
+
+void		freed(char **str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str[i]);
+	free(str);
 }

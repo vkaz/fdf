@@ -12,7 +12,10 @@
 
 int		get_hook(t_mlx *fdf)
 {
-	//printf("Control by arrows\n");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 10, 0xfc0000, "To exit press ESC");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 30, 0x50ff00, "Move by arrows");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 50, 0x50ff00, "To incrase press +");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 70, 0x50ff00, "To decrase press -");
 	draw_y(fdf);
 	draw_x(fdf);
 	return (1);
@@ -21,7 +24,7 @@ int		get_hook(t_mlx *fdf)
 int		key_hook(int keycode, t_mlx *param)
 {
 	if (keycode == 53)
-		exit(1);
+		closing(param);
 	mlx_clear_window(param->mlx_ptr, param->win_ptr);
 	if (keycode == 123)
 		param->delx -= 10;
@@ -55,6 +58,7 @@ void	read_file(t_mlx *fdf, int fd)
 		if (fdf->line)
 		{
 			fdf->i = 0;
+			fdf->line_copy = fdf->line;
 			fdf->line = fdf_to_space(fdf->line);
 			fdf->split = ft_strsplit(fdf->line, ' ');
 			fdf->nbr_split[fdf->k] = ft_count_split(fdf->split);
@@ -66,10 +70,11 @@ void	read_file(t_mlx *fdf, int fd)
 				fdf->nbr[fdf->j][fdf->i] = ft_getnbr(fdf->split[fdf->i]);
 				(fdf->i)++;
 			}
-			free(fdf->split);
+			freed(fdf->split);
 			(fdf->j)++;
 			(fdf->k)++;
 		}
+		free(fdf->line_copy);
 	}
 }
 void	init(t_mlx *fdf)
@@ -91,7 +96,6 @@ void	init(t_mlx *fdf)
 	fdf->i = 0;
 	fdf->incx = 0;
 	fdf->incy = 0;
-	fdf->nbr[0][0] = 0;
 }
 
 int			main(int ac, char **av)
@@ -114,6 +118,6 @@ int			main(int ac, char **av)
 		mlx_loop(fdf.mlx_ptr);
 	}
 	else
-		ft_putendl("usage /fdf \"file\"");
+		ft_putendl("usage ./fdf \"file\"");
 	return (0);
 }

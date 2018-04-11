@@ -1,5 +1,12 @@
 #include "fdf.h"
 
+void	closing(t_mlx *param)
+{
+	mlx_destroy_window(param->mlx_ptr, param->win_ptr);
+	system("leaks --quiet fdf");
+	exit(1);
+}
+
 int		ft_getnbr(char *str)
 {
 	int		ret;
@@ -50,6 +57,9 @@ void	ft_count_line(t_mlx *fdf, int fd)
 
 	fdf->nbr_line = 0;
 	while (get_next_line(fd, &line) == 1)
+	{
 		(fdf->nbr_line)++;
+		free(line);
+	}
 	close(fd);
 }

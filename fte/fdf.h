@@ -43,6 +43,7 @@ typedef struct		s_mlx
 	int				j;
 	int				k;
 	char			*line;
+	char			*line_copy;
 	int				incx;
 	int				incy;
 	int 			delx;
@@ -51,12 +52,12 @@ typedef struct		s_mlx
 
 typedef struct 	s_dob
 {
-	double 	dx;
-	double 	dy;
+	double 		dx;
+	double 		dy;
 	double		d;
 	double		d1;
 	double		d2;
-	double 	s1;
+	double 		s1;
 	double		s2;
 	double		sx;
 }				t_dob;
@@ -70,5 +71,7 @@ void	ft_count_line(t_mlx *fdf, int fd);
 void	read_file(t_mlx *fdf, int fd);
 void	draw_y(t_mlx *fdf);
 void	draw_x(t_mlx *fdf);
+void	closing(t_mlx *param);
+void	freed(char **str);
 
 #endif
