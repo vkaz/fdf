@@ -44,23 +44,16 @@ typedef struct		s_mlx
 	int				k;
 	char			*line;
 	char			*line_copy;
-	int				incx;
-	int				incy;
 	int 			delx;
 	int 			dely;
-}					t_mlx;
-
-typedef struct 	s_dob
-{
-	double 		dx;
-	double 		dy;
 	double		d;
 	double		d1;
 	double		d2;
 	double 		s1;
 	double		s2;
 	double		sx;
-}				t_dob;
+}					t_mlx;
+
 
 
 void	draw(t_mlx *fdf);

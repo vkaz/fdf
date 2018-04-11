@@ -3,7 +3,6 @@
 void	closing(t_mlx *param)
 {
 	mlx_destroy_window(param->mlx_ptr, param->win_ptr);
-	system("leaks --quiet fdf");
 	exit(1);
 }
 
