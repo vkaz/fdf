@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vkaznodi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/12 13:14:54 by vkaznodi          #+#    #+#             */
+/*   Updated: 2018/04/12 13:14:56 by vkaznodi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fdf.h"
 
@@ -11,7 +22,7 @@ int		coord_x(t_mlx *fdf, int x, int y)
 
 int		coord_y(t_mlx *fdf, int x, int y, int z)
 {
-	int 	a;
+	int		a;
 
 	a = fdf->starty + ((fdf->scaly) * x) + ((fdf->scaly) * y) - (z * 2);
 	return (a);
@@ -19,8 +30,8 @@ int		coord_y(t_mlx *fdf, int x, int y, int z)
 
 void	draw_y(t_mlx *fdf)
 {
-	int			i; 
-	int			j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < fdf->nbr_line)

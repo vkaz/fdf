@@ -1,19 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fun.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vkaznodi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/12 13:15:04 by vkaznodi          #+#    #+#             */
+/*   Updated: 2018/04/12 13:15:07 by vkaznodi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	closing(t_mlx *param)
 {
 	mlx_destroy_window(param->mlx_ptr, param->win_ptr);
+	system("leaks fdf");
 	exit(1);
 }
 
-int		ft_getnbr(char *str)
+int		getnum(char *str)
 {
 	int		ret;
 
 	if (*str == '-')
-		return (-ft_getnbr(str + 1));
+		return (-getnum(str + 1));
 	if (*str == '+')
-		return (ft_getnbr(str + 1));
+		return (getnum(str + 1));
 	ret = 0;
 	while (*str && *str >= '0' && *str <= '9')
 	{
@@ -34,7 +47,7 @@ int		ft_count_split(char **split)
 	return (i);
 }
 
-char	*fdf_to_space(char *str)
+char	*fdf_space(char *str)
 {
 	int i;
 

@@ -5,23 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkaznodi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/27 17:14:57 by vkaznodi          #+#    #+#             */
-/*   Updated: 2018/02/27 17:14:58 by vkaznodi         ###   ########.fr       */
+/*   Created: 2018/04/12 13:21:02 by vkaznodi          #+#    #+#             */
+/*   Updated: 2018/04/12 13:21:04 by vkaznodi         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 #include "fdf.h"
 
-int		get_hook(t_mlx *fdf)
+static int		get_hook(t_mlx *fdf)
 {
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 10, 0xfc0000, "To exit press ESC");
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 30, 0x50ff00, "Move by arrows");
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 50, 0x50ff00, "To incrase press +");
-	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 70, 0x50ff00, "To decrase press -");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 10, 0xfc0000,
+		"To exit press ESC");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 30, 0x50ff00,
+		"Move by arrows");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 50, 0x50ff00,
+		"To incrase press +");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 10, 70, 0x50ff00,
+		"To decrase press -");
 	draw_y(fdf);
 	draw_x(fdf);
 	return (1);
 }
 
-int		key_hook(int keycode, t_mlx *param)
+static int		key_hook(int keycode, t_mlx *param)
 {
 	if (keycode == 53)
 		closing(param);
@@ -48,7 +54,7 @@ int		key_hook(int keycode, t_mlx *param)
 	return (0);
 }
 
-void	read_file(t_mlx *fdf, int fd)
+static void		read_file(t_mlx *fdf, int fd)
 {
 	if (!(fdf->nbr = (int **)malloc(sizeof(int *) * fdf->nbr_line)) ||
 			!(fdf->nbr_split = (int *)malloc(sizeof(int) * fdf->nbr_line)))
@@ -57,17 +63,13 @@ void	read_file(t_mlx *fdf, int fd)
 	{
 		if (fdf->line)
 		{
-			fdf->i = 0;
-			fdf->line_copy = fdf->line;
-			fdf->line = fdf_to_space(fdf->line);
-			fdf->split = ft_strsplit(fdf->line, ' ');
-			fdf->nbr_split[fdf->k] = ft_count_split(fdf->split);
+			doing(fdf);
 			if (!(fdf->nbr[fdf->j] = (int *)malloc(sizeof(int) *
 							fdf->nbr_split[fdf->k])))
 				exit(1);
 			while (fdf->split[fdf->i])
 			{
-				fdf->nbr[fdf->j][fdf->i] = ft_getnbr(fdf->split[fdf->i]);
+				fdf->nbr[fdf->j][fdf->i] = getnum(fdf->split[fdf->i]);
 				(fdf->i)++;
 			}
 			freed(fdf->split);
@@ -77,7 +79,8 @@ void	read_file(t_mlx *fdf, int fd)
 		free(fdf->line_copy);
 	}
 }
-void	init(t_mlx *fdf)
+
+static void		init(t_mlx *fdf)
 {
 	fdf->j = 0;
 	fdf->k = 0;
@@ -89,7 +92,7 @@ void	init(t_mlx *fdf)
 	fdf->dely = 0;
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_mlx	fdf;
 	int		fd;
